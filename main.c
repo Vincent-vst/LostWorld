@@ -7,7 +7,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(){
+
+
+// retourne le nom du fichier demandé par le client 
+void return_file () {
+
+	
+}
+
+
+int connection (){
 	struct addrinfo hints, *res; 
 	int sockfd, confd, error; 
 
@@ -39,6 +48,10 @@ int main(){
 		exit(2);
 	}
 
+	// retourner le fichier du client ici 
+	return_file();
+
+
 	int nbOctets; 
 	char buffer [1024];
 
@@ -53,6 +66,18 @@ int main(){
 	close(confd); 
 	close(sockfd);
 	freeaddrinfo(res);
+
+	return 0; 
+
+}
+
+
+
+
+int main(){
+
+	connection();
+
 
 
 	return 0; 
