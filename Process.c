@@ -35,7 +35,7 @@ void traitementRequete(int confd)
 	//Si la requête est incorrecte on renvoie dans ce bloc pour afficher l'erreur 400
 	{
 		if(send(confd, error400, sizeof(char)*strlen(error400) , 0)<0) perror (" Erreur send ");
-		if((fdFichier = open("file400.html", O_RDONLY))<0)perror("Erreur open");
+		if((fdFichier = open("website/file400.html", O_RDONLY))<0)perror("Erreur open");
 		
 		while((nbOctets = read(fdFichier, buffer, 100))>0){
 			if(send(confd, buffer, nbOctets , 0)<0) perror (" Erreur send ");

@@ -71,10 +71,10 @@ int parseRequest(char* requestFromClient, int requestSize, char* string, int str
 	}
 	
 	//DEBUG - Vous pouvez le supprimer si vous le souhaitez.
-	if( *(charPtr[1]+2) == '\0') fprintf(stderr,"DEBUG-SERVEUR: le nom de fichier demande est vide -\nDEBUG-SERVEUR: - on associe donc le fichier par defaut index.html\n");
+	if( *(charPtr[1]+2) == '\0') fprintf(stderr,"DEBUG-SERVEUR: le nom de fichier demande est vide -\nDEBUG-SERVEUR: - on associe donc le fichier par defaut website/index.html\n");
 	else fprintf(stderr,"DEBUG-SERVEUR: le nom de fichier demande est %s\n",string);
 
-	if( *(charPtr[1]+2) == '\0') strcpy(string,"index.html");
+	if( *(charPtr[1]+2) == '\0') strcpy(string,"website/index.html");
 
 	return(0);
 }
@@ -89,7 +89,7 @@ void traitementErreurOpen(int confd, int fdFichier) {
 	if(errno==ENOENT)//Le fichier n'existe pas
 	{
 		if(send(confd, error404, sizeof(char)*strlen(error404) , 0)<0) perror (" Erreur send ");
-		if((fdFichier = open("file404.html", O_RDONLY))<0)perror("Erreur open");
+		if((fdFichier = open("website/file404.html", O_RDONLY))<0)perror("Erreur open");
 		
 		while((nbOctets = read(fdFichier, buffer, 100))>0){
 			if(send(confd, buffer, nbOctets , 0)<0) perror (" Erreur send ");
@@ -98,7 +98,7 @@ void traitementErreurOpen(int confd, int fdFichier) {
 	else if(errno==EACCES)//Le droits d'accès au fichier sont restreints
 	{
 		if(send(confd, error500, sizeof(char)*strlen(error500) , 0)<0) perror (" Erreur send ");
-		if((fdFichier = open("file500.html", O_RDONLY))<0)perror("Erreur open");
+		if((fdFichier = open("website/file500.html", O_RDONLY))<0)perror("Erreur open");
 		
 		while((nbOctets = read(fdFichier, buffer, 100))>0){
 			if(send(confd, buffer, nbOctets , 0)<0) perror (" Erreur send ");
