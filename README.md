@@ -21,7 +21,8 @@ $ ./a.out
 ```
 # type in the url : 
 127.0.0.1:2000
-# now whatever you put in your index.html should show in your browser 
+# now you can change the content of the website/ folder
+# and everything you put in your website/index.html should appear on your browser
 ```
 
 
