@@ -19,5 +19,9 @@ $ ./a.out
 *in your web browser :*
 
 ```
-
+# type in the url : 
+127.0.0.1:2000
+# now whatever you put in your index.html should show in your browser 
 ```
+
+
