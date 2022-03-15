@@ -26,9 +26,9 @@ int main() {
 	
 
 	memset(&hints,0,sizeof(hints));
-	hints.ai_family = AF_INET6; //IPv4 ou IPv6
-	hints.ai_socktype = SOCK_STREAM; //TCP
-	hints.ai_flags = AI_PASSIVE; //Permet d'associer la socket a toutes les adresses locales
+	hints.ai_family = AF_INET6; 
+	hints.ai_socktype = SOCK_STREAM; 
+	hints.ai_flags = AI_PASSIVE; 
 	
 	if((error = getaddrinfo(NULL,"2000",&hints,&res))!=0) gai_strerror(error);
 	
