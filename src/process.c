@@ -26,8 +26,13 @@ void traitementRequete(int confd) {
 	char buffer[1000],  fileName[100];
 	
 	char error400[]="HTTP/1.1 400 BAD REQUEST\r\nContent-Type: text/html\r\n\r\n";
+	//client request 
 	if(recv(confd, buffer, sizeof(buffer)*sizeof(char), 0)<0) perror (" Erreur recv ");
-	
+
+	/* 
+	 * Parsing request 
+	 * 400 error if the file can't open
+	*/ 
 	if(parseRequest(buffer, sizeof(buffer) , fileName, sizeof(fileName)) == -1 ) {
 		if(send(confd, error400, sizeof(char)*strlen(error400) , 0)<0) perror (" Erreur send ");
 		if((fdFichier = open("website/file400.html", O_RDONLY))<0)perror("Erreur open");
@@ -75,7 +80,9 @@ void traitementReponse(char* fileName, int confd, int fdFichier) {
 		}
 	}
 }
-
+/* 
+ * Print client IP 
+ * */ 
 void afficheIp(unsigned char* ipclient) {
 	printf("%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x\n", ipclient[0],ipclient[1],ipclient[2],ipclient[3],ipclient[4],ipclient[5],ipclient[6], ipclient[7],ipclient[8],ipclient[9],ipclient[10],ipclient[11],ipclient[12],ipclient[13],ipclient[14],ipclient[15]);
 }

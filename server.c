@@ -27,10 +27,13 @@ int main() {
 	
 
 	memset(&hints,0,sizeof(hints));
+	// adding IPV6
 	hints.ai_family = AF_INET6; 
 	hints.ai_socktype = SOCK_STREAM; 
+	// for local address
 	hints.ai_flags = AI_PASSIVE; 
 	
+
 	if((error = getaddrinfo(NULL,"2000",&hints,&res))!=0) gai_strerror(error);
 	
 	if((sockfd=socket(res->ai_family,res->ai_socktype,res->ai_protocol))<0) perror("socket error");
