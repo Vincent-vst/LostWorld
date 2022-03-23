@@ -15,7 +15,9 @@
 #include <errno.h>
 
 
-
+/* 
+ * cf : http://www.anthonybusson.fr/index.php/teaching
+ * */ 
 int parseRequest(char* requestFromClient, int requestSize, char* string, int stringSize) {
 
 	char *charPtr[4], *end;
