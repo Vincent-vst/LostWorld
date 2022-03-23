@@ -13,9 +13,10 @@
 #include <fcntl.h>
 #include <stddef.h>
 #include <errno.h>
-#include "src/parser.c"
-#include "src/process.c"
-
+/* #include "src/parser.c" */
+#include "src/parser.h"
+/* #include "src/process.c" */
+#include "src/process.h"
 
 int main() {
 
@@ -32,10 +33,10 @@ int main() {
 	
 	if((error = getaddrinfo(NULL,"2000",&hints,&res))!=0) gai_strerror(error);
 	
-	if((sockfd=socket(res->ai_family,res->ai_socktype,res->ai_protocol))<0) perror("Erreur socket():");
+	if((sockfd=socket(res->ai_family,res->ai_socktype,res->ai_protocol))<0) perror("socket error");
 	
-	if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,1,sizeof(int)) == -1) perror("Erreur setsockopt() SO_REUSEADDR");
-	if(bind(sockfd, (struct sockaddr *) res->ai_addr, res->ai_addrlen )<0) perror("Erreur bind()");
+	if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,1,sizeof(int)) == -1) perror("Error setsockopt() SO_REUSEADDR");
+	if(bind(sockfd, (struct sockaddr *) res->ai_addr, res->ai_addrlen )<0) perror("Bind error");
 
 	if(listen(sockfd,1)<0) perror("Erreur listen()");
 
@@ -52,7 +53,7 @@ int main() {
 		close(confd);
 	} 
 	
-	if(confd<0) perror (" Erreur accept ");
+	if(confd<0) perror ("Error accept");
 	freeaddrinfo(res);
 	
 	return 0;
