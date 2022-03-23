@@ -34,8 +34,7 @@ int main() {
 	
 	if((sockfd=socket(res->ai_family,res->ai_socktype,res->ai_protocol))<0) perror("Erreur socket():");
 	
-	int tr=1 ;
-	if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,&tr,sizeof(int)) == -1) perror("Erreur setsockopt() SO_REUSEADDR");
+	if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,1,sizeof(int)) == -1) perror("Erreur setsockopt() SO_REUSEADDR");
 	if(bind(sockfd, (struct sockaddr *) res->ai_addr, res->ai_addrlen )<0) perror("Erreur bind()");
 
 	if(listen(sockfd,1)<0) perror("Erreur listen()");
