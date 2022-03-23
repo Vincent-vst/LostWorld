@@ -12,7 +12,7 @@ Lostworld is a homemade web server written in C.
 ```
 $ git clone https://github.com/Vincent-vst/LostWorld.git
 $ cd LostWorld 
-$ gcc Server.c
+$ gcc server.c src/parser.c src/process.c
 $ ./a.out 
 ```
 
