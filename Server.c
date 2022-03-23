@@ -13,8 +13,8 @@
 #include <fcntl.h>
 #include <stddef.h>
 #include <errno.h>
-#include "Parser.c"
-#include "Process.c"
+#include "src/parser.c"
+#include "src/process.c"
 
 
 int main() {
