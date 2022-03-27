@@ -2,12 +2,12 @@
 
 ## About  
 
-Lostworld is a homemade web server written in C.
-*prerequisite : you need something to compile C code (like `gcc` for instance)*
+Lostworld is a homemade web server written in C.   
+*prerequisite : you need something to compile C code (like `gcc` for instance)*   
 
 ## Usage  
 
-*in your command line :*
+*in your command line :*  
 
 ```
 $ git clone https://github.com/Vincent-vst/LostWorld.git
@@ -15,7 +15,7 @@ $ cd LostWorld
 $ make
 ```
 
-*in your web browser :*
+*in your web browser :*  
 
 ```
 # type in the url : 
