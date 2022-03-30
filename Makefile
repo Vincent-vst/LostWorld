@@ -1,9 +1,9 @@
 
 output : 
-	gcc server.c src/parser.c src/process.c -o server
-	./server
+	gcc src/main.c
+	src/main
 
 clean : 
-	rm -f server 
+	rm -f src/main 
 
 

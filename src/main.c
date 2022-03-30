@@ -22,16 +22,29 @@ int main() {
 	memset(&hints,0,sizeof(hints)); 
 	hints.ai_family = AF_UNSPEC; 
 	hints.ai_socktype = SOCK_STREAM;
+    char message[] = "GET / HTTP/1.1\nHost: www.google.com\n\n";
+    char buf[1024];
+    int bytes_read;
 
 	if(getaddrinfo("www.google.fr", "http",&hints,&res)!=0) gai_strerror(error); 
 
-	if((sockfd=socket(..., ..., ...))<0) perror("Erreur socket():");  
+	if((sockfd=socket(res->ai_family, res->ai_socktype, res->ai_protocol))<0) perror("Erreur socket():");  
 
-	if(connect(...,...,...)<0) perror("Erreur connect()"); 
+	if(connect(sockfd,res->ai_addr,res->ai_addrlen)<0) perror("Erreur connect()"); 
 
-	if(send(...,...,...,...)<0) perror("Erreur send()");
+	if(send(sockfd,message,strlen(message),0)<0) perror("Erreur send()");
 
-	if(recv(...,bufferRec,...,...)<0) perror("Erreur recv");
+    while (bytes_read > 0){
+        bytes_read = recv(sockfd, buf, 1024, 0);
+        if (bytes_read == -1) {
+            perror("Erreur recv");
+        }
+        else {
+            printf("%.*s", bytes_read, buf);
+        }
+    } 
+
+
 
 	return 0; 
 }
