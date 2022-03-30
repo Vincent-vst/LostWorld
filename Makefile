@@ -1,9 +1,13 @@
 
 output : 
-	gcc src/main.c
-	src/main
+	gcc main.c
+	./a.out &
+	PID=$!
+	sleep 2
+	kill $PID
+
 
 clean : 
-	rm -f src/main 
+	rm -f a.out
 
 

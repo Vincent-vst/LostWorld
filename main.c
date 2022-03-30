@@ -24,7 +24,6 @@ int main(void)
     
     if (status != 0) perror("erreur getaddrinfo");
 
-
     sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
     if (sockfd == -1) perror(" erreur socket");
 
