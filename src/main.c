@@ -16,6 +16,7 @@
 
 int main() {
 
+	char website[] = "www.google.com";
 
 	struct addrinfo hints, *res; 
 	int sockfd, error;
@@ -26,7 +27,7 @@ int main() {
     char buf[1024];
     int bytes_read;
 
-	if(getaddrinfo("www.google.fr", "http",&hints,&res)!=0) gai_strerror(error); 
+	if(getaddrinfo(website, "https",&hints,&res)!=0) gai_strerror(error); 
 
 	if((sockfd=socket(res->ai_family, res->ai_socktype, res->ai_protocol))<0) perror("Erreur socket():");  
 
@@ -43,6 +44,10 @@ int main() {
             printf("%.*s", bytes_read, buf);
         }
     } 
+
+	close(sockfd);
+
+
 
 
 

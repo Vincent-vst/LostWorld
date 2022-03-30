@@ -7,11 +7,11 @@
  
 int main(void)
 {
-    int sock;
-    char host[] = "www.martinbroadhurst.com";
+    int sockfd;
+    char host[] = "www.google.com";
     char port[] = "80";
     struct addrinfo hints, *res;
-    char message[] = "GET / HTTP/1.1\nHost: www.martinbroadhurst.com\n\n";
+    char message[] = "GET / HTTP/1.1\nHost: www.google.com\n\n";
     unsigned int i;
     char buf[1024];
     int bytes_read;
@@ -21,34 +21,30 @@ int main(void)
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     status = getaddrinfo(host, port, &hints, &res);
-    if (status != 0) {
-        perror("getaddrinfo");
-        return 1;
-    }
-    sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-    if (sock == -1) {
-        perror("socket");
-        return 1;
-    }
-    status = connect(sock, res->ai_addr, res->ai_addrlen);
-    if (status == -1) {
-        perror("connect");
-        return 1;
-    }
+    
+    if (status != 0) perror("erreur getaddrinfo");
+
+
+    sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+    if (sockfd == -1) perror(" erreur socket");
+
+    status = connect(sockfd, res->ai_addr, res->ai_addrlen);
+    if (status == -1) perror("erreur connect");
+
     freeaddrinfo(res);
-    send(sock, message, strlen(message), 0);
+    send(sockfd, message, strlen(message), 0);
  
-    do {
-        bytes_read = recv(sock, buf, 1024, 0);
+    while (bytes_read > 0) {
+        bytes_read = recv(sockfd, buf, 1024, 0);
         if (bytes_read == -1) {
             perror("recv");
         }
         else {
             printf("%.*s", bytes_read, buf);
         }
-    } while (bytes_read > 0);
+    } 
  
-    close(sock);
+    close(sockfd);
  
     return 0;
 }
